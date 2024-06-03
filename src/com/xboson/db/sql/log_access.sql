@@ -1,0 +1,30 @@
+INSERT INTO `sys_pl_log_access`
+  (
+  `logid`,
+  `log_time`,
+  `log_level`,
+  `log_error_type`,
+  `requestid`,
+  `serverid`,
+  `log`,
+  `pid`,
+  `user_key`,
+  `access_cd`,
+  `clientid`,
+  `createdt`
+  )
+VALUES
+  (
+  ?,
+  ?,
+  'INFO',
+  'NONE',
+  null,
+  null,
+  ?,
+  ?,
+  null,
+  ?,
+  null,
+  now()
+  );

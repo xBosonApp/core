@@ -1,0 +1,80 @@
+body, #contentdiv {
+  display: flex;
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  background-color: #ddd;
+  flex-direction: row;
+  overflow-y: auto;
+}
+
+section {
+  margin-top: 80px;
+  padding: 0 20px;
+}
+
+form {
+  margin-top: 150px;
+}
+
+form section {
+  padding: 0 20px;
+}
+
+input, select {
+  font-size: 13px;
+  padding: 5px 50px;
+  font-weight: bold;
+}
+
+h1 {
+  border-bottom: 1px solid #666;
+  font-size: 40px;
+}
+
+h2 {
+  padding: 0 20px;
+}
+
+h6 {
+  background-color: #fff;
+  padding: 10px 20px;
+}
+
+label {
+  margin: 10px 0;
+}
+
+.info {
+  color: #999;
+}
+
+.red {
+  color: red;
+}
+
+table {
+  margin-left: 20px;
+}
+
+select {
+  width: 295px;
+}
+
+#left {
+  background-color: #fff;
+  width: 38.2%;
+  text-align: right;
+  padding: 20% 20px 0 0;
+  color: #666;
+  opacity: 0;
+}
+
+#right {
+  width: 61.8%;
+  padding: 100px 0 0 0px;
+  opacity: 0;
+}

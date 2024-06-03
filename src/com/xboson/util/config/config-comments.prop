@@ -1,0 +1,84 @@
+# 配置文件属性的说明文档
+
+configVersion: 配置文件版本号, 随着系统升级而升级
+clusterNodeID: 本机在集群中的节点 ID, 保证生成不冲突的主键 ID, 有效范围: 0-1023
+
+
+logLevel: 全局默认日志过滤级别: ALL | OFF | DEBUG | INFO | WARN | ERROR | FATAL
+loggerWriterType: 日志输出类型, 可用逗号分隔多个输出类型, 可选的: ConsoleOut | FileOut | DbOut
+sessionPassword: session 密钥, 集群中所有节点必须相同
+sessionTimeout: session 超时时间, 分钟
+debugService: HTTP 服务接口, 是否输出错误堆栈
+
+
+uiProviderClass:  ui 获取方式, 有集群缓冲区以及本地目录, 两种模式, \
+                  同一个集群中只有一个本地目录模式; \
+                  local : 本地目录; \
+                  online : 集群缓冲区;
+
+uiUrl: 本地目录模式的根目录
+uiListDir: 当用户请求目录时, 是否返回目录列表
+uiWelcome: 访问根路径时的跳转页面
+
+
+nodeProviderClass: node 模块文件模式, 与 uiProviderClass 定义相同
+nodeUrl: 本地模式根目录
+shellUrl: 操作系统外壳脚本文件目录
+
+
+enableUploadClear: 启用后, 每天凌晨清除昨天上传的临时文件
+enableSessionClear: 启用后, 每天凌晨清除昨天的所有登录信息
+enableUIFileSync: 启用后, 每天凌晨同步本地 UI 文件
+
+
+sysTableList: 系统表数组, 当其他机构调用平台机构中的应用访问这些表时, \
+              总是指向平台机构中的表, 而不是被替换到对应机构中的表;\
+              这个配置来自原平台 config.properties -> PL_TBLS 字段. \
+              (如果表名称以 'sys_pl_' 为前缀, 自动应用该特性.)
+shareAppList: 共享应用数组, 来自平台机构中的应用, 这些应用可以在其他机构中调用.
+
+
+dbpool: 数据库连接池的设置
+jedispool: redis 连接池的设置
+db: 平台核心数据库连接配置
+redis: 平台核心 redis 连接配置, 务必配置密钥字段, \
+       并且在 redis 服务器配置文件中加入 'requirepass yourpassword' 设置.
+mongodb: MongoDB 服务器连接配置, 禁用后不影响平台核心功能, 但脚本环境中无法调用 MongoDB 模块.
+
+
+enable: 启用/禁用
+blockWhenExhausted: 默认值 true ,当资源耗尽时,是否阻塞等待获取资源
+maxWaitMillis: 获取资源时的等待时间,单位毫秒.当 blockWhenExhausted 配置为 true 时,\
+               此值有效. -1 代表无时间限制,一直阻塞直到有可用的资源.
+numTestsPerEvictionRun: 资源回收线程执行一次回收操作,回收资源的数量.默认值 3
+
+testOnBorrow: 默认值 false ,当设置为true时, 每次从池中获取资源时都会调用 \
+              validateObject() 方法, 考虑提升性能可以关闭
+testOnReturn: 指明是否在归还到池中前进行检验
+testWhileIdle: 设置为 true 时, 当回收策略返回 false, \
+               则调用 activateObject() 和 validateObject()
+testOnCreate: 创建对象后立即进行检验
+
+timeBetweenEvictionRunsMillis:  回收资源线程的执行周期,单位毫秒.默认值 -1 ,\
+                                -1 表示不启用线程回收资源
+evictionPolicyClassName: 设置的逐出策略类名, \
+                         默认DefaultEvictionPolicy(当连接超过最大空闲时间, \
+                         或连接数超过最大空闲连接数)
+minEvictableIdleTimeMillis: 逐出连接的最小空闲时间 默认1800000毫秒(30分钟)
+jmxEnabled: 是否启用pool的jmx管理功能, 默认true
+lifo: 是否启用后进先出, 默认true
+
+maxTotalPerKey: 每种(不同的DB类型, 不同的连接参数)数据库连接的最大数量
+maxIdlePerKey: 每种(不同的DB类型, 不同的连接参数)数据库连接的最大空闲数量, 超过的部分直接释放资源
+minIdle: 允许空闲对象最小值, 不足的部分立即创建补足.
+maxIdle: 允许空闲对象最大值, 超过的部分直接释放资源
+maxTotal: 允许创建资源的最大数量,默认值 8,-1 代表无数量限制
+
+# rootPassword: MD5 of Password
+# rootUserName: 配置为 root 用户的用户名
+
+chainPath: 区块链数据保存目录, 绝对路径
+chainIncrement: 区块链文件增长单位, KB
+chainEnable: 启用区块链服务器
+
+remoteIpHeader: 客户端地址来自 http 头域(当平台在代理后面), 可以空.
