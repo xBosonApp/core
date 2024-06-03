@@ -1,0 +1,87 @@
+////////////////////////////////////////////////////////////////////////////////
+//
+// Copyright 2018 本文件属于 xBoson 项目, 该项目由 J.yanming 维护,
+// 本文件和项目的全部权利由 [荆彦铭] 和 [王圣波] 个人所有, 如有对本文件或项目的任何修改,
+// 必须通知权利人; 该项目非开源项目, 任何将本文件和项目未经权利人同意而发行给第三方
+// 的行为都属于侵权行为, 权利人有权对侵权的个人和企业进行索赔; 未经其他合同约束而
+// 由本项目(程序)引起的计算机软件/硬件问题, 本项目权利人不负任何责任, 切不对此做任何承诺.
+//
+// 文件创建日期: 18-2-7 下午2:35
+// 原始文件路径: D:/javaee-project/xBoson/src/com/xboson/fs/watcher/SingleFile.java
+// 授权说明版本: 1.1
+//
+// [ J.yanming - Q.412475540 ]
+//
+////////////////////////////////////////////////////////////////////////////////
+
+package com.xboson.fs.watcher;
+
+import com.xboson.util.Tool;
+
+import java.io.Closeable;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.WatchEvent;
+
+
+/**
+ * 监听单个文件的包装器
+ */
+public class SingleFile implements INotify, Closeable {
+
+  /** 接收事件的最小间隔, 防止多次触发 */
+  public static final long MIN_INTERVAL = 1000;
+
+  private String fileName;
+  private INotify recv;
+  private long last;
+  private IWatcher watcher;
+
+  /**
+   * 构造单文件监听器, 该方法成功返回后, 文件处于监听状态.
+   *
+   * @param basePath 文件所在目录
+   * @param fileName 文件名
+   * @param recv 当文件被修改, 该接口接收修改事件
+   */
+  public SingleFile(String basePath, String fileName, INotify recv)
+          throws IOException {
+    this.fileName = fileName;
+    this.recv = recv;
+
+    Path path = Paths.get(basePath);
+    watcher = LocalDirWatcher.me().watchModify(path, this);
+  }
+
+
+  @Override
+  public void notify(String basename,
+                     String filename,
+                     WatchEvent event,
+                     WatchEvent.Kind kind)
+          throws IOException
+  {
+    long now = System.currentTimeMillis();
+    if (now - last < MIN_INTERVAL)
+      return;
+
+    last = now;
+
+    if (filename.equals(this.fileName)) {
+      recv.notify(basename, filename, event, kind);
+    }
+  }
+
+
+  @Override
+  public void remove(String basename) {
+    recv.remove(basename);
+  }
+
+
+  @Override
+  public void close() throws IOException {
+    Tool.close(watcher);
+  }
+}

@@ -1,0 +1,404 @@
+[
+  {
+    "sqlid": "api0001",
+    "content": "select sys_apis.appid,sys_apis.moduleid,sys_apis.apiid,sys_apis.apinm,sys_apis.op_type,sys_apis.contentid,sys_apis.status,sys_apis.createdt,sys_apis.updatedt,sys_apis.updatecmt,sys_apis.pid,sys_api_content.content from sys_apis join sys_api_content on sys_apis.contentid=sys_api_content.contentid  where ",
+    "sql_desc": "预留数据。导入导出 API 使用",
+    "sql_group": "base"
+  },
+  {
+    "sqlid": "api0002",
+    "content": "select sys_api_his.hisid,sys_api_his.appid,sys_api_his.moduleid,sys_api_his.apiid,sys_api_his.updatedt,sys_api_his.pid,sys_api_his.updatecmt,sys_api_his.apinm,sys_api_his.op_type,sys_api_his.status,sys_api_his_content.content from sys_api_his join sys_api_his_content on sys_api_his.hisid=sys_api_his_content.hisid  where",
+    "sql_desc": "预留数据。导入导出 API 使用",
+    "sql_group": "base"
+  },
+  {
+    "sqlid": "api0003",
+    "content": "select appid,moduleid,apiid,apinm,op_type,contentid,status,createdt,updatedt,updatecmt,pid from sys_apis where appid=? and moduleid=? and apiid=?",
+    "sql_desc": "预留数据。导入导出 API 使用",
+    "sql_group": "base"
+  },
+  {
+    "sqlid": "api0004",
+    "content": "insert into sys_apis (appid,moduleid,apiid,apinm,op_type,contentid,status,createdt,updatedt,updatecmt,pid) values (?,?,?,?,?,?,?,?,?,?,?)",
+    "sql_desc": "预留数据。导入导出 API 使用",
+    "sql_group": "base"
+  },
+  {
+    "sqlid": "api0005",
+    "content": "update sys_apis set apinm=?,op_type=?,contentid=?,status=?,createdt=?,updatedt=?,updatecmt=?,pid=? where appid=? and moduleid=? and apiid=?",
+    "sql_desc": "预留数据。导入导出 API 使用",
+    "sql_group": "base"
+  },
+  {
+    "sqlid": "api0006",
+    "content": "insert into sys_api_content (contentid,content) values (?,?)",
+    "sql_desc": "预留数据。导入导出 API 使用",
+    "sql_group": "base"
+  },
+  {
+    "sqlid": "api0007",
+    "content": "update sys_api_content set content=? where contentid=?",
+    "sql_desc": "预留数据。导入导出 API 使用",
+    "sql_group": "base"
+  },
+  {
+    "sqlid": "api0008",
+    "content": "insert into sys_api_his (hisid,appid,moduleid,apiid,updatedt,pid,updatecmt,apinm,op_type,status) values (?,?,?,?,?,?,?,?,?,?)",
+    "sql_desc": "预留数据。导入导出 API 使用",
+    "sql_group": "base"
+  },
+  {
+    "sqlid": "api0009",
+    "content": "insert into sys_api_his_content (hisid,content) values (?,?)",
+    "sql_desc": "预留数据。导入导出 API 使用",
+    "sql_group": "base"
+  },
+  {
+    "sqlid": "api0010",
+    "content": "select appid,appnm,about,status,createdt,updatedt,uri from sys_apps where",
+    "sql_desc": "预留数据。导入导出 API 使用",
+    "sql_group": "base"
+  },
+  {
+    "sqlid": "api0011",
+    "content": "insert into sys_apps (appid,appnm,about,status,createdt,updatedt,uri) values (?,?,?,?,?,?,?)",
+    "sql_desc": "预留数据。导入导出 API 使用",
+    "sql_group": "base"
+  },
+  {
+    "sqlid": "api0012",
+    "content": "select appid,moduleid,modulenm,about,auflag,status,createdt,updatedt from sys_modules where",
+    "sql_desc": "预留数据。导入导出 API 使用",
+    "sql_group": "base"
+  },
+  {
+    "sqlid": "api0013",
+    "content": "select appid,moduleid,modulenm,about,auflag,status,createdt,updatedt from sys_modules where appid=? and moduleid=?",
+    "sql_desc": "预留数据。导入导出 API 使用",
+    "sql_group": "base"
+  },
+  {
+    "sqlid": "api0014",
+    "content": "insert into sys_modules (appid,moduleid,modulenm,about,auflag,status,createdt,updatedt) values (?,?,?,?,?,?,?,?)",
+    "sql_desc": "预留数据。导入导出 API 使用",
+    "sql_group": "base"
+  },
+  {
+    "sqlid": "auth0002",
+    "content": "select role.roleid,api.appid,api.moduleid,api.apiid \r\nfrom sys_role_api api,sys_role role,sys_apps apps,sys_modules modules,sys_apis apis \r\nwhere api.roleid=role.roleid \r\nand api.appid=apps.appid \r\nand api.appid=modules.appid \r\nand api.moduleid=modules.moduleid \r\nand (modules.auflag='0' or modules.auflag='2') \r\nand api.appid=apis.appid \r\nand api.moduleid=apis.moduleid \r\nand api.apiid=apis.apiid \r\nand role.status='1' and api.status='1' and apps.status='1' and modules.status='1' and apis.status='1'",
+    "sql_desc": "预留数据。所有角色API信息",
+    "sql_group": "base"
+  },
+  {
+    "sqlid": "auth0003",
+    "content": "select sys_role.orgid,sys_role.roleid,sys_role_api.appid,sys_role_api.moduleid,sys_role_api.apiid from sys_role_api,sys_role,sys_apps,sys_modules,sys_apis where sys_role_api.roleid=sys_role.roleid and sys_role.orgid=? and sys_role_api.appid=sys_apps.appid and sys_role_api.appid=sys_modules.appid and sys_role_api.moduleid=sys_modules.moduleid and (sys_modules.auflag='0' or sys_modules.auflag='2') and sys_role_api.appid=sys_apis.appid and sys_role_api.moduleid=sys_apis.moduleid and sys_role_api.apiid=sys_apis.apiid and sys_role.status='1' and sys_role_api.status='1' and sys_apps.status='1' and sys_modules.status='1' and sys_apis.status='1'",
+    "sql_desc": "预留数据。从 DB 获取指定机构的角色信息",
+    "sql_group": "base"
+  },
+  {
+    "sqlid": "auth0004",
+    "content": "select sys_role.orgid orgid, sys_role.roleid roleid \r\nfrom sys_user_role,sys_role \r\nwhere sys_user_role.pid=? \r\nand sys_user_role.roleid=sys_role.roleid \r\nand sys_user_role.status='1' \r\nand sys_role.status='1'\r\n union \r\nselect sys_pl_org_application.orgid orgid,sys_user_role.roleid roleid \r\nfrom sys_user_role,sys_pl_role_release,sys_pl_application_release,sys_pl_biz_application,sys_pl_org_application \r\nwhere sys_user_role.pid=? \r\nand sys_user_role.roleid=sys_pl_role_release.roleid \r\nand sys_pl_role_release.applicationid=sys_pl_application_release.applicationid \r\nand sys_pl_application_release.applicationid=sys_pl_biz_application.applicationid  \r\nand sys_pl_biz_application.applicationid=sys_pl_org_application.applicationid \r\nand sys_pl_biz_application.biz_status='20' \r\nand sys_pl_org_application.orgid=? \r\nand (sys_pl_org_application.expiration='00000000' or sys_pl_org_application.expiration>=?) \r\nand sys_user_role.status='1' \r\nand sys_pl_role_release.status='1' \r\nand sys_pl_application_release.status='1' \r\nand sys_pl_biz_application.status='1' \r\nand sys_pl_org_application.status='1' \r\n union \r\nselect sys_role.orgid orgid, sys_role.roleid roleid \r\nfrom sys_dept_role,sys_user_dept,mdm_dept,mdm_org,sys_role \r\nwhere sys_user_dept.pid=? \r\nand sys_dept_role.deptid=sys_user_dept.deptid \r\nand sys_user_dept.deptid=mdm_dept.deptid \r\nand mdm_dept.orgid=mdm_org.orgid \r\nand mdm_dept.orgid=? \r\nand sys_dept_role.roleid=sys_role.roleid \r\nand sys_dept_role.status='1' \r\nand sys_user_dept.status='1' \r\nand mdm_dept.status='1' \r\nand mdm_org.status='1' \r\nand sys_role.status='1'\r\n union \r\nselect sys_pl_org_application.orgid orgid,sys_dept_role.roleid roleid \r\nfrom sys_dept_role,sys_pl_role_release,sys_pl_application_release,sys_pl_biz_application,sys_pl_org_application,sys_user_dept,mdm_dept,mdm_org \r\nwhere sys_user_dept.pid=? \r\nand sys_dept_role.deptid=sys_user_dept.deptid \r\nand sys_user_dept.deptid=mdm_dept.deptid \r\nand mdm_dept.orgid=mdm_org.orgid \r\nand mdm_dept.orgid=? \r\nand sys_dept_role.roleid=sys_pl_role_release.roleid \r\nand sys_pl_role_release.applicationid=sys_pl_application_release.applicationid \r\nand sys_pl_application_release.applicationid=sys_pl_biz_application.applicationid  \r\nand sys_pl_biz_application.applicationid=sys_pl_org_application.applicationid \r\nand sys_pl_biz_application.biz_status='20' \r\nand sys_pl_org_application.orgid=? \r\nand (sys_pl_org_application.expiration='00000000' or sys_pl_org_application.expiration>=?) \r\nand sys_dept_role.status='1' \r\nand sys_pl_role_release.status='1' \r\nand sys_pl_application_release.status='1' \r\nand sys_pl_biz_application.status='1' \r\nand sys_pl_org_application.status='1' \r\nand mdm_dept.status='1' \r\nand mdm_org.status='1' \r\n\r\n",
+    "sql_desc": "预留数据。获取登录用户角色ID信息",
+    "sql_group": "base"
+  },
+  {
+    "sqlid": "auth0005",
+    "content": "select sys_role.orgid orgid, sys_role.roleid roleid \r\nfrom sys_system_role,sys_role \r\nwhere sys_system_role.sysid=? \r\nand sys_system_role.roleid=sys_role.roleid \r\nand sys_system_role.status='1' and sys_role.status='1' \r\nunion \r\nselect sys_pl_org_application.orgid orgid,sys_system_role.roleid roleid \r\nfrom sys_system_role,sys_pl_role_release,sys_pl_application_release,sys_pl_biz_application,sys_pl_org_application \r\nwhere sys_system_role.sysid=? \r\nand sys_system_role.roleid=sys_pl_role_release.roleid \r\nand sys_pl_role_release.applicationid=sys_pl_application_release.applicationid \r\nand sys_pl_application_release.applicationid=sys_pl_biz_application.applicationid \r\nand sys_pl_biz_application.applicationid=sys_pl_org_application.applicationid \r\nand sys_pl_biz_application.biz_status='20' \r\nand sys_pl_org_application.orgid=? and \r\n(sys_pl_org_application.expiration='00000000' or sys_pl_org_application.expiration>=?) \r\nand sys_system_role.status='1' and sys_pl_role_release.status='1' and sys_pl_application_release.status='1' and sys_pl_biz_application.status='1' and sys_pl_org_application.status='1' ",
+    "sql_desc": "预留数据。应用信息更新时向缓存中更新系统信息",
+    "sql_group": "base"
+  },
+  {
+    "sqlid": "auth0006",
+    "content": "select sysid from sys_system where status = '1'",
+    "sql_desc": "预留数据。获取所有可用系统ID",
+    "sql_group": "base"
+  },
+  {
+    "sqlid": "auth0007",
+    "content": "select sysrole.sysid,role.orgid orgid,role.roleid roleid \r\nfrom sys_system_role sysrole,sys_role role \r\nwhere sysrole.roleid=role.roleid \r\nand sysrole.status='1' and role.status='1' \r\nunion \r\nselect sys_system_role.sysid,sys_pl_org_application.orgid orgid,sys_system_role.roleid roleid \r\nfrom sys_system_role,sys_pl_role_release,sys_pl_application_release,sys_pl_biz_application,sys_pl_org_application \r\nwhere sys_system_role.roleid=sys_pl_role_release.roleid \r\nand sys_pl_role_release.applicationid=sys_pl_application_release.applicationid \r\nand sys_pl_application_release.applicationid=sys_pl_biz_application.applicationid \r\nand sys_pl_biz_application.applicationid=sys_pl_org_application.applicationid \r\nand sys_pl_biz_application.biz_status='20' \r\nand sys_pl_org_application.orgid=? and \r\n(sys_pl_org_application.expiration='00000000' or sys_pl_org_application.expiration>=?) \r\nand sys_system_role.status='1' and sys_pl_role_release.status='1' and sys_pl_application_release.status='1' and sys_pl_biz_application.status='1' and sys_pl_org_application.status='1' ",
+    "sql_desc": "预留数据。获取所有可用系统的角色ID",
+    "sql_group": "base"
+  },
+  {
+    "sqlid": "auth0008",
+    "content": "select sys_role.roleid,sys_role_api.appid,sys_role_api.moduleid,sys_role_api.apiid \r\nfrom sys_role_api,sys_role,sys_apps,sys_modules,sys_apis\r\nwhere sys_role.comm_flag='1' \r\nand sys_role_api.roleid=sys_role.roleid\r\nand sys_role_api.appid=sys_apps.appid\r\nand sys_role_api.appid=sys_modules.appid\r\nand sys_role_api.moduleid=sys_modules.moduleid\r\nand (sys_modules.auflag='0' or sys_modules.auflag='2')\r\nand sys_role_api.appid=sys_apis.appid\r\nand sys_role_api.moduleid=sys_apis.moduleid\r\nand sys_role_api.apiid=sys_apis.apiid\r\nand sys_role.status='1'\r\nand sys_role_api.status='1'\r\nand sys_apps.status='1'\r\nand sys_modules.status='1'\r\nand sys_apis.status='1'",
+    "sql_desc": "所有可用的通用角色信息",
+    "sql_group": "base"
+  },
+  {
+    "sqlid": "auth0009",
+    "content": "select sys_role.roleid id,sys_role.rolenm name from sys_org_comm_role,sys_role where sys_org_comm_role.orgid=? and \r\nsys_org_comm_role.roleid=sys_role.roleid and sys_role.comm_flag='1' and sys_org_comm_role.status='1' and sys_role.status='1'",
+    "sql_desc": "获取机构拥有通用角色 ID 和 名称 集合[ { id:xxx, name:xxx}, { id:xxx, name:xxx} ]",
+    "sql_group": "base"
+  },
+  {
+    "sqlid": "auth0010",
+    "content": "select menuid,null p_menuid,1 levels,menu_icon,menunm,uri,0 sorting_order,menu_desc,orgid,roleid from sys_menu where roleid is not null and status='1' order by roleid",
+    "sql_desc": "获取平台菜单表中角色ID不为空的记录",
+    "sql_group": "base"
+  },
+  {
+    "sqlid": "auth0011",
+    "content": "select roleid from sys_role where comm_flag='1' and status='1'",
+    "sql_desc": "获取平台角色表中的通用角色ID",
+    "sql_group": "base"
+  },
+  {
+    "sqlid": "auth0012",
+    "content": " select sys_role_release.roleid id, sys_role_release.rolenm name from sys_pl_org_application join sys_application_release on sys_pl_org_application.applicationid=sys_application_release.applicationid\r\n join sys_role_release on sys_pl_org_application.applicationid = sys_role_release.applicationid and sys_role_release.applicationid=sys_application_release.applicationid\r\n where sys_pl_org_application.orgid=? and sys_pl_org_application.status='1' and sys_application_release.status='1' and sys_role_release.status='1'",
+    "sql_desc": "获取机构应用所拥有的角色，关联sys_pl_org_application，sys_role_release，sys_application_release",
+    "sql_group": "base"
+  },
+  {
+    "sqlid": "auth0013",
+    "content": "SELECT sys_menu_release.menuid,\r\n       sys_menu_release.p_menuid,\r\n       sys_menu_release.levels,\r\n       sys_menu_release.menu_icon,\r\n       sys_menu_release.menunm,\r\n       sys_menu_release.uri,\r\n       sys_menu_release.sorting_order,\r\n       sys_menu_release.menu_desc,\r\n       sys_application_release.orgid\r\nFROM sys_pl_org_application\r\nJOIN sys_application_release ON sys_pl_org_application.applicationid=sys_application_release.applicationid\r\nJOIN sys_menu_release ON sys_pl_org_application.applicationid = sys_menu_release.applicationid\r\nAND sys_menu_release.applicationid=sys_application_release.applicationid\r\nWHERE sys_pl_org_application.orgid=?\r\n  AND sys_pl_org_application.status='1'\r\n  AND sys_application_release.status='1'\r\n  AND sys_menu_release.status='1'",
+    "sql_desc": "获取机构应用所拥有的菜单，关联sys_pl_org_application，sys_role_release，sys_application_release",
+    "sql_group": "base"
+  },
+  {
+    "sqlid": "auth0014",
+    "content": "select role.roleid,api.appid,api.moduleid,api.apiid \r\nfrom sys_pl_role_release role,sys_pl_application_release app, sys_pl_role_api_release api,sys_pl_biz_application biz \r\nwhere role.applicationid=app.applicationid and role.roleid=api.roleid \r\nand biz.applicationid=app.applicationid \r\nand biz.biz_status='20' \r\nand role.status='1' and app.status='1' and api.status='1' and biz.status='1'",
+    "sql_desc": "系统预留。获取各机构已发布上线的应用的角色 API 信息",
+    "sql_group": "base"
+  },
+  {
+    "sqlid": "auth0015",
+    "content": "select sys.sysid,api.roleid,api.appid,api.moduleid,api.apiid \r\nfrom sys_system_role sysrole,sys_role role,sys_role_api api,sys_system sys,sys_apps apps,sys_modules modules,sys_apis apis \r\nwhere sysrole.roleid=role.roleid and role.roleid=api.roleid and sysrole.sysid=sys.sysid and sys.orgid=? \r\nand api.appid=apps.appid \r\nand api.appid=modules.appid \r\nand api.moduleid=modules.moduleid \r\nand (modules.auflag='0' or modules.auflag='2') \r\nand api.appid=apis.appid \r\nand api.moduleid=apis.moduleid \r\nand api.apiid=apis.apiid \r\nand sysrole.status='1' and role.status='1' and api.status='1' and sys.status='1' \r\nand apps.status='1' and modules.status='1' and apis.status='1'",
+    "sql_desc": "系统预留。获取系统角色信息",
+    "sql_group": "base"
+  },
+  {
+    "sqlid": "auth0016",
+    "content": "select app.orgid,api.appid,api.moduleid,api.apiid \r\nfrom sys_pl_application_release app, sys_pl_pub_api_release api,sys_pl_biz_application biz \r\nwhere api.applicationid=app.applicationid \r\nand biz.applicationid=app.applicationid \r\nand biz.biz_status='20' \r\nand app.status='1' and api.status='1' and biz.status='1'",
+    "sql_desc": "系统预留。获取已发布上线公共API信息",
+    "sql_group": "base"
+  },
+  {
+    "sqlid": "auth0017",
+    "content": "select api.appid,api.moduleid,api.apiid \r\nfrom sys_pl_application_release app, sys_pl_pub_api_release api \r\nwhere app.orgid=? and api.applicationid=app.applicationid and app.applicationid=? \r\nand app.status='1' and api.status='1'",
+    "sql_desc": "系统预留。获取指定机构已发布的指定公共应用的角色 API 信息",
+    "sql_group": "base"
+  },
+  {
+    "sqlid": "auth0018",
+    "content": "select role.roleid,api.appid,api.moduleid,api.apiid \r\nfrom sys_pl_role_release role,sys_pl_application_release app, sys_pl_role_api_release api \r\nwhere app.orgid=? and role.applicationid=app.applicationid and app.applicationid=? and role.roleid=api.roleid \r\nand role.status='1' and app.status='1' and api.status='1'",
+    "sql_desc": "系统预留。获取指定机构已发布的指定应用的角色 API 信息",
+    "sql_group": "base"
+  },
+  {
+    "sqlid": "auth0019",
+    "content": "select typecd from sys_pl_application_release app, sys_pl_pub_model_release model where app.orgid=? and model.applicationid=app.applicationid and app.applicationid=? and app.status='1' and model.status='1'",
+    "sql_desc": "系统预留。获取指定机构已发布的指定公共应用的角色模型信息",
+    "sql_group": "base"
+  },
+  {
+    "sqlid": "auth0020",
+    "content": "select role.roleid,model.typecd from sys_pl_role_release role,sys_pl_application_release app, sys_pl_role_model_release model where app.orgid=? and role.applicationid=app.applicationid and app.applicationid=? and role.roleid=model.roleid and role.status='1' and app.status='1' and model.status='1'",
+    "sql_desc": "系统预留。获取指定机构已发布的指定应用的角色模型信息",
+    "sql_group": "base"
+  },
+  {
+    "sqlid": "auth0021",
+    "content": "select sys_role.orgid orgid, sys_role.roleid roleid \r\nfrom sys_user_role,sys_role where sys_user_role.pid=? and sys_user_role.roleid=sys_role.roleid and sys_user_role.status='1' and sys_role.status='1' \r\nunion \r\nselect sys_pl_org_application.orgid orgid,sys_user_role.roleid roleid from \r\nsys_user_role,sys_pl_role_release,sys_pl_application_release,sys_pl_biz_application,sys_pl_org_application where sys_user_role.pid=? and sys_user_role.roleid=sys_pl_role_release.roleid and sys_pl_role_release.applicationid=sys_pl_application_release.applicationid and sys_pl_application_release.applicationid=sys_pl_biz_application.applicationid and sys_pl_biz_application.applicationid=sys_pl_org_application.applicationid and sys_pl_biz_application.biz_status='20' and sys_pl_org_application.orgid=? and (sys_pl_org_application.expiration='00000000' or sys_pl_org_application.expiration>=?) and sys_user_role.status='1' and sys_pl_role_release.status='1' and sys_pl_application_release.status='1' and sys_pl_biz_application.status='1' and sys_pl_org_application.status='1' \r\nunion \r\nselect sys_role.orgid orgid, sys_role.roleid roleid from sys_role_ug,sys_ug,sys_ug_user,sys_role where sys_ug_user.pid=? and sys_ug_user.ugid=sys_ug.ugid and sys_ug.ugid=sys_role_ug.ugid and sys_role_ug.roleid=sys_role.roleid and sys_role_ug.status='1' and sys_ug.status='1' and sys_ug_user.status='1' and sys_role.status='1' \r\nunion \r\nselect sys_pl_org_application.orgid orgid,sys_role_ug.roleid roleid from sys_role_ug,sys_pl_role_release,sys_pl_application_release,sys_pl_biz_application,sys_pl_org_application,sys_ug,sys_ug_user where sys_ug_user.pid=? and sys_ug_user.ugid=sys_ug.ugid and sys_ug.ugid=sys_role_ug.ugid and sys_role_ug.roleid=sys_pl_role_release.roleid and sys_pl_role_release.applicationid=sys_pl_application_release.applicationid and sys_pl_application_release.applicationid=sys_pl_biz_application.applicationid and sys_pl_biz_application.applicationid=sys_pl_org_application.applicationid and sys_pl_biz_application.biz_status='20' and sys_pl_org_application.orgid=? and (sys_pl_org_application.expiration='00000000' or sys_pl_org_application.expiration>=?) and sys_role_ug.status='1' and sys_pl_role_release.status='1' and sys_pl_application_release.status='1' and sys_pl_biz_application.status='1' and sys_pl_org_application.status='1' and sys_ug.status='1' and sys_ug_user.status='1'",
+    "sql_desc": "系统预留",
+    "sql_group": "base"
+  },
+  {
+    "sqlid": "client0001",
+    "content": "select rc.scope,role.roleid \r\nfrom sys_role_client rc,sys_role role \r\nwhere rc.client_id=? and rc.roleid=role.roleid and rc.status='1' and role.status='1' \r\nunion \r\nselect sys_role_client.scope,sys_role_client.roleid roleid \r\nfrom sys_role_client,sys_pl_role_release,sys_pl_application_release,sys_pl_biz_application,sys_pl_org_application \r\nwhere sys_role_client.client_id=? and sys_role_client.roleid=sys_pl_role_release.roleid \r\nand sys_pl_role_release.applicationid=sys_pl_application_release.applicationid \r\nand sys_pl_application_release.applicationid=sys_pl_biz_application.applicationid \r\nand sys_pl_biz_application.applicationid=sys_pl_org_application.applicationid \r\nand sys_pl_biz_application.biz_status='20' \r\nand sys_pl_org_application.orgid=? \r\nand (sys_pl_org_application.expiration='00000000' or sys_pl_org_application.expiration>=?) \r\nand sys_role_client.status='1' \r\nand sys_pl_role_release.status='1' \r\nand sys_pl_application_release.status='1' \r\nand sys_pl_biz_application.status='1' \r\nand sys_pl_org_application.status='1' ",
+    "sql_desc": "系统预留。",
+    "sql_group": "base"
+  },
+  {
+    "sqlid": "config0001",
+    "content": "select config_key,config_value from sys_config where status='1'",
+    "sql_desc": "预留数据。获取所有可用系统配置属性",
+    "sql_group": "base"
+  },
+  {
+    "sqlid": "config0002",
+    "content": "select config_key,config_value from sys_config where config_key=? and status='1'",
+    "sql_desc": "预留数据。从 DB 中获取指定的系统配置属性",
+    "sql_group": "base"
+  },
+  {
+    "sqlid": "conn0001",
+    "content": "select did,owner orgid,url conn_url,user_name conn_user,pass conn_pwd,dbtype,pool_enabled,prop from sys_pl_drm_ds001 where status='1'",
+    "sql_desc": "获取所有可用数据服务连接",
+    "sql_group": "base"
+  },
+  {
+    "sqlid": "conn0002",
+    "content": "select did,owner orgid,url conn_url,user_name conn_user,pass conn_pwd,dbtype,pool_enabled,prop from sys_pl_drm_ds001 where did=? and status='1'",
+    "sql_desc": "从 DB 中获取指定的可用数据服务连接",
+    "sql_group": "base"
+  },
+  {
+    "sqlid": "dict0005",
+    "content": "select sqlid, content from sys_sqls where sql_group='dict'",
+    "sql_desc": "预留数据。获取所有主数据数据字典",
+    "sql_group": "base"
+  },
+  {
+    "sqlid": "dict0007",
+    "content": "select max(updatedt) updatedt from ",
+    "sql_desc": "预留数据。",
+    "sql_group": "base"
+  },
+  {
+    "sqlid": "dict0008",
+    "content": "select dictcd id, dictnm name, concat(dictnm, '(', ifnull(shortkey,''), ')') text from sys_mdm002 where typecd=? and version=? and status='1'",
+    "sql_desc": "更新平台数据字典缓存时用",
+    "sql_group": "base"
+  },
+  {
+    "sqlid": "etl0001",
+    "content": "SELECT id_slave,name,host_name,port,web_app_name,username,proxy_host_name,proxy_port,non_proxy_hosts,master,password FROM demolfy.R_SLAVE where 1=1",
+    "sql_desc": "预留数据。",
+    "sql_group": "base"
+  },
+  {
+    "sqlid": "ide0001",
+    "content": "select appid,moduleid,apiid,content from (\r select sys_apis.appid,sys_apis.moduleid,sys_apis.apiid,sys_api_content.content,sys_api_content.stability \r from sys_apps,sys_modules,sys_apis,sys_api_content \r where sys_apps.appid = sys_apis.appid and sys_modules.appid = sys_apis.appid and sys_modules.moduleid = sys_apis.moduleid and \r sys_apps.status = '1' and sys_modules.status = '1' and sys_apis.status = '1' and \r sys_apps.appflag = '0' and (sys_modules.auflag = '0' or sys_modules.auflag = '2') and sys_apis.contentid = sys_api_content.contentid \r and (sys_api_content.stability='50' or sys_api_content.stability='60') \r union\r select sys_apis.appid,sys_apis.moduleid,sys_apis.apiid,sys_api_his_content.content,sys_api_his_content.stability \r from sys_apps,sys_modules,sys_apis,\r (select max(his.updatedt) updatedt,sys_apis.appid,sys_apis.moduleid,sys_apis.apiid\r from sys_apps,sys_modules,sys_apis,sys_api_his_content his \r where sys_apps.appid = sys_apis.appid and sys_modules.appid = sys_apis.appid and sys_modules.moduleid = sys_apis.moduleid and \r sys_apps.status = '1' and sys_modules.status = '1' and sys_apis.status = '1' and \r sys_apps.appflag = '0' and (sys_modules.auflag = '0' or sys_modules.auflag = '2') and sys_apis.contentid = his.contentid \r and (his.stability='50' or his.stability='60') group by sys_apis.appid,sys_apis.moduleid,sys_apis.apiid\r ) max_his,sys_api_his_content left join \r (select sys_api_content.contentid\r from sys_apps,sys_modules,sys_apis,sys_api_content \r where sys_apps.appid = sys_apis.appid and sys_modules.appid = sys_apis.appid and sys_modules.moduleid = sys_apis.moduleid and \r sys_apps.status = '1' and sys_modules.status = '1' and sys_apis.status = '1' and \r sys_apps.appflag = '0' and (sys_modules.auflag = '0' or sys_modules.auflag = '2') and sys_apis.contentid = sys_api_content.contentid \r and (sys_api_content.stability='50' or sys_api_content.stability='60')\r ) sys_api_content on sys_api_his_content.contentid=sys_api_content.contentid\r where sys_apps.appid = sys_apis.appid and sys_modules.appid = sys_apis.appid and sys_modules.moduleid = sys_apis.moduleid and \r sys_apps.status = '1' and sys_modules.status = '1' and sys_apis.status = '1' and \r sys_apps.appflag = '0' and (sys_modules.auflag = '0' or sys_modules.auflag = '2') and sys_apis.contentid=sys_api_his_content.contentid  \r and (sys_api_his_content.stability='50' or sys_api_his_content.stability='60')\r and sys_api_his_content.updatedt=max_his.updatedt\r and sys_api_content.contentid is null\r ) recent_record where recent_record.stability='50'",
+    "sql_desc": "预留数据。缓存API KPI，IDE 使用API 除外",
+    "sql_group": "base"
+  },
+  {
+    "sqlid": "ide0002",
+    "content": "select sys_apis.appid,sys_apis.moduleid,sys_apis.apiid,sys_api_content.content \r\nfrom sys_apps,sys_modules,sys_apis,sys_api_content \r\nwhere sys_apps.appid = sys_apis.appid and sys_modules.appid = sys_apis.appid and sys_modules.moduleid = sys_apis.moduleid and \r\nsys_apps.status = '1' and sys_modules.status = '1' and sys_apis.status = '1' and \r\nsys_apps.appflag = '0' and (sys_modules.auflag = '0' or sys_modules.auflag = '2') and sys_apis.contentid = sys_api_content.contentid \r\nand sys_apps.appid='ZYAPP_IDE' and sys_api_content.stability='50'\r\nunion\r\nselect sys_apis.appid,sys_apis.moduleid,sys_apis.apiid,sys_api_his_content.content \r\nfrom sys_apps,sys_modules,sys_apis,\r\n(select max(his.hisid) hisid,sys_apis.appid,sys_apis.moduleid,sys_apis.apiid\r\nfrom sys_apps,sys_modules,sys_apis,sys_api_his_content his \r\nwhere sys_apps.appid = sys_apis.appid and sys_modules.appid = sys_apis.appid and sys_modules.moduleid = sys_apis.moduleid and \r\nsys_apps.status = '1' and sys_modules.status = '1' and sys_apis.status = '1' and \r\nsys_apps.appflag = '0' and (sys_modules.auflag = '0' or sys_modules.auflag = '2') and sys_apis.contentid = his.contentid \r\nand sys_apps.appid='ZYAPP_IDE' and his.stability='50' group by sys_apis.appid,sys_apis.moduleid,sys_apis.apiid\r\n) max_his,sys_api_his_content left join \r\n(select sys_api_content.contentid\r\nfrom sys_apps,sys_modules,sys_apis,sys_api_content \r\nwhere sys_apps.appid = sys_apis.appid and sys_modules.appid = sys_apis.appid and sys_modules.moduleid = sys_apis.moduleid and \r\nsys_apps.status = '1' and sys_modules.status = '1' and sys_apis.status = '1' and \r\nsys_apps.appflag = '0' and (sys_modules.auflag = '0' or sys_modules.auflag = '2') and sys_apis.contentid = sys_api_content.contentid \r\nand sys_apps.appid='ZYAPP_IDE' and sys_api_content.stability='50'\r\n) sys_api_content on sys_api_his_content.contentid=sys_api_content.contentid\r\nwhere sys_apps.appid = sys_apis.appid and sys_modules.appid = sys_apis.appid and sys_modules.moduleid = sys_apis.moduleid and \r\nsys_apps.status = '1' and sys_modules.status = '1' and sys_apis.status = '1' and \r\nsys_apps.appflag = '0' and (sys_modules.auflag = '0' or sys_modules.auflag = '2') and sys_apis.contentid =sys_api_his_content.contentid  \r\nand sys_apps.appid='ZYAPP_IDE' and sys_api_his_content.stability='50' \r\nand sys_api_his_content.hisid=max_his.hisid\r\nand sys_api_content.contentid is null",
+    "sql_desc": "预留数据。缓存 IDE 使用API",
+    "sql_group": "base"
+  },
+  {
+    "sqlid": "ide0003",
+    "content": "select sys_api_content.content from sys_apps,sys_modules,sys_apis,sys_api_content \r where sys_apps.appid = sys_apis.appid and sys_modules.appid = sys_apis.appid and sys_modules.moduleid = sys_apis.moduleid and \r sys_apps.status = '1' and sys_modules.status = '1' and sys_apis.status = '1' and \r sys_apps.appflag = '0' and (sys_modules.auflag = '0' or sys_modules.auflag = '2') and sys_apis.contentid = sys_api_content.contentid and sys_apis.appid=? and sys_apis.moduleid=? and sys_apis.apiid=?",
+    "sql_desc": "从 DB 获取 API 代码内容",
+    "sql_group": "base"
+  },
+  {
+    "sqlid": "ide0004",
+    "content": "SELECT apis.appid, apis.moduleid, apis.apiid,content.content\r\n\tFROM sys_apps apps, sys_modules modules, sys_apis apis, sys_api_content content \r\n\tWHERE apps.appid = apis.appid\r\n\t\tAND modules.appid = apis.appid\r\n\t\tAND modules.moduleid = apis.moduleid\r\n\t\tAND apps.status = '1'\r\n\t\tAND modules.status = '1'\r\n\t\tAND apis.status = '1'\r\n\t\tAND (modules.auflag = '0' OR modules.auflag = '2')\r\n\t\tAND apis.contentid = content.contentid\r\n\t\tAND content.stability = '50'\r\nunion\r\nSELECT apis.appid, apis.moduleid, apis.apiid,his_api.content\r\nFROM sys_apps apps, sys_modules modules, sys_apis apis, (SELECT his.stability, his.contentid,his.content\r\n\t FROM sys_api_his_content his, (\r\n        SELECT MAX(max_his.updatedt) AS updatedt\r\n\t    FROM sys_api_his_content max_his\r\n\t\tWHERE (max_his.stability = '50' OR max_his.stability = '60')\r\n\t    GROUP BY max_his.contentid\r\n        ) max_his_api\r\n        WHERE his.updatedt=max_his_api.updatedt\r\n        AND NOT EXISTS (\r\n\t\t\t\t\t\tSELECT * FROM sys_api_content a WHERE (a.stability = '50' OR a.stability = '60') AND a.contentid=his.contentid\r\n\t\t\t\t\t\t) \r\n) his_api\r\nWHERE his_api.stability='50'\r\nAND apps.appid = apis.appid\r\nAND modules.appid = apis.appid\r\nAND modules.moduleid = apis.moduleid\r\nAND (modules.auflag = '0' OR modules.auflag = '2')\r\nAND apps.status = '1'\r\nAND modules.status = '1'\r\nAND apis.status = '1'\r\nAND apis.contentid = his_api.contentid",
+    "sql_desc": "缓存api使用",
+    "sql_group": "base"
+  },
+  {
+    "sqlid": "ide0005",
+    "content": "SELECT all_api.content content\r\nFROM (\r\nSELECT apis.appid appid, apis.moduleid moduleid, apis.apiid apiid,content.content content \r\n \tFROM sys_apps apps, sys_modules modules, sys_apis apis, sys_api_content content \r\n \tWHERE apps.appid = apis.appid\r\n \t\tAND modules.appid = apis.appid\r\n \t\tAND modules.moduleid = apis.moduleid\r\n \t\tAND apps.status = '1'\r\n \t\tAND modules.status = '1'\r\n \t\tAND apis.status = '1'\r\n \t\tAND (modules.auflag = '0' OR modules.auflag = '2')\r\n \t\tAND apis.contentid = content.contentid\r\n \t\tAND content.stability = '50'\r\n union\r\n SELECT apis.appid appid, apis.moduleid moduleid, apis.apiid apiid,his_api.content content \r\n FROM sys_apps apps, sys_modules modules, sys_apis apis, (SELECT his.stability, his.contentid,his.content\r\n \t FROM sys_api_his_content his, (\r\n         SELECT MAX(max_his.updatedt) AS updatedt\r\n \t    FROM sys_api_his_content max_his\r\n \t\tWHERE (max_his.stability = '50' OR max_his.stability = '60')\r\n \t    GROUP BY max_his.contentid\r\n         ) max_his_api\r\n         WHERE his.updatedt=max_his_api.updatedt\r\n         AND NOT EXISTS (\r\n \t\t\t\t\t\tSELECT * FROM sys_api_content a WHERE (a.stability = '50' OR a.stability = '60') AND a.contentid=his.contentid\r\n \t\t\t\t\t\t) \r\n ) his_api\r\n WHERE his_api.stability='50'\r\n AND apps.appid = apis.appid\r\n AND modules.appid = apis.appid\r\n AND modules.moduleid = apis.moduleid\r\n AND (modules.auflag = '0' OR modules.auflag = '2')\r\n AND apps.status = '1'\r\n AND modules.status = '1'\r\n AND apis.status = '1'\r\n AND apis.contentid = his_api.contentid\r\n ) all_api WHERE all_api.appid=? AND all_api.moduleid=? AND all_api.apiid=? ",
+    "sql_desc": "预留数据。从DB获取已上线的API",
+    "sql_group": "base"
+  },
+  {
+    "sqlid": "mdm_org",
+    "content": "select orgid id, case when de0810011 is null then de0810013j else de0810011 end name, case when de0810011 is null then de0810013j else de0810011 end text, status, updatedt from mdm_org order by name",
+    "sql_desc": "机构",
+    "sql_group": "dict"
+  },
+  {
+    "sqlid": "model0001",
+    "content": "select modolcd typecd,modolnm  name,dstypecd,did,tablenm,sqltype,sqltext,sqlparams,typecontent,isui from sys_bm002",
+    "sql_desc": "操纵模型缓存",
+    "sql_group": "model"
+  },
+  {
+    "sqlid": "model0002",
+    "content": "select a.typecd,b.typenm name,a.table_json,a.did,a.editingtype,a.jsondata_select,a.fromcontent,a.jsondata_where,a.sel_whe_columns,a.sqltext,a.typecontent from sys_bm003 a,sys_bm001 b where a.typecd = b.typecd",
+    "sql_desc": "多维模型-数据视图缓存",
+    "sql_group": "model"
+  },
+  {
+    "sqlid": "model0003",
+    "content": "select a.typecd,b.typenm name,a.table_json,a.typecd_parent,a.tablesource,a.row_json,a.column_json,a.where_json,a.typecontent from sys_bm004 a,sys_bm001 b where a.typecd = b.typecd",
+    "sql_desc": "多维模型-维度视图缓存",
+    "sql_group": "model"
+  },
+  {
+    "sqlid": "sys0001",
+    "content": "select sysid,sysnm,ip,port,uri,inner_flag,orgid,status from sys_system",
+    "sql_desc": "预留数据。获取所有系统信息",
+    "sql_group": "base"
+  },
+  {
+    "sqlid": "sys0002",
+    "content": "select sysid,sysnm,ip,port,uri,inner_flag,orgid,status from sys_system where sysid=?",
+    "sql_desc": "预留数据。获取指定系统信息",
+    "sql_group": "base"
+  },
+  {
+    "sqlid": "tenant0001",
+    "content": "select tenant.orgid,tenant.org_type,tenant.init_db,tenant.pid,tenant.status from sys_tenant tenant,mdm_org org where tenant.orgid=org.orgid and org.status='1' and tenant.status='1'",
+    "sql_desc": "预留数据。获取租户信息集合",
+    "sql_group": "base"
+  },
+  {
+    "sqlid": "user0001",
+    "content": "select user1.pid,user1.userid,user1.nickname,user1.tel,user1.email,user1.password,user1.multiflag,user1.password_dt,user1.last_dt,user1.last_ip,mdm.de0201039 from sys_userinfo user1 left join mdm_personal_info mdm on user1.pid=mdm.pid where user1.userid=? and user1.status='1' and mdm.status='1'",
+    "sql_desc": "预留数据。用户信息",
+    "sql_group": "base"
+  },
+  {
+    "sqlid": "user0002",
+    "content": "select u.tp_appid appid,u.uid uid,u.scope scope,u.req_scope req_scope from sys_pl_tp_app_uid u,sys_pl_tp_app app where u.tp_appid=app.tp_appid and u.pid=? and u.status='1' and app.status='1'",
+    "sql_desc": "预留数据。获取用户绑定的第三方用户ID列表",
+    "sql_group": "base"
+  },
+  {
+    "sqlid": "user0003",
+    "content": "select sys_tenant.orgid orgid,mdm_org.de0810013j orgnm,sys_tenant.org_type org_type,sys_tenant.url,sys_tenant_user.admin_flag \r\nfrom sys_tenant_user,sys_tenant,mdm_org \r\nwhere sys_tenant_user.pid=? and sys_tenant_user.orgid=sys_tenant.orgid and sys_tenant.orgid=mdm_org.orgid \r\nand sys_tenant_user.status='1' and sys_tenant.status='1' and mdm_org.status='1'",
+    "sql_desc": "预留数据。获取指定用户所属机构列表",
+    "sql_group": "base"
+  },
+  {
+    "sqlid": "user0004",
+    "content": "select user1.pid,user1.userid,user1.nickname,user1.tel,user1.email,user1.password,user1.multiflag,user1.password_dt,user1.last_dt,user1.last_ip,mdm.de0201039 from sys_userinfo user1 left join mdm_personal_info mdm on user1.pid=mdm.pid where user1.status='1' and mdm.status='1'",
+    "sql_desc": "预留数据。从平台mdm_personal_info表获取人名",
+    "sql_group": "base"
+  },
+  {
+    "sqlid": "user0007",
+    "content": "select user1.pid,user1.userid,user1.nickname,user1.tel,user1.email,user1.password,user1.multiflag,user1.password_dt,user1.last_dt,user1.last_ip,mdm.de0201039 from sys_userinfo user1 left join mdm_personal_info mdm on user1.pid=mdm.pid where user1.tel=? and user1.status='1' and mdm.status='1'",
+    "sql_desc": "预留数据",
+    "sql_group": "base"
+  },
+  {
+    "sqlid": "user0008",
+    "content": "select user1.pid,user1.userid,user1.nickname,user1.tel,user1.email,user1.password,user1.multiflag,user1.password_dt,user1.last_dt,user1.last_ip,mdm.de0201039 from sys_userinfo user1 left join mdm_personal_info mdm on user1.pid=mdm.pid where user1.email=? and user1.status='1' and mdm.status='1'",
+    "sql_desc": "预留数据。",
+    "sql_group": "base"
+  },
+  {
+    "sqlid": "user0009",
+    "content": "update sys_userinfo set last_dt=?,last_ip=?,updatedt=? where userid=?",
+    "sql_desc": "系统预留。",
+    "sql_group": "base"
+  },
+  {
+    "sqlid": "user0010",
+    "content": "insert into sys_pl_tp_app_uid(tp_appid,pid,scope,req_scope,uid,status,createdt,updatedt) values (?,?,?,?,?,?,?,?)",
+    "sql_desc": "预留数据。",
+    "sql_group": "base"
+  },
+  {
+    "sqlid": "user0011",
+    "content": "update sys_pl_tp_app_uid set scope=?,req_scope=?,updatedt=? where tp_appid=? and pid=?",
+    "sql_desc": "系统预留。",
+    "sql_group": "base"
+  },
+  {
+    "sqlid": "user0012",
+    "content": "select ug.ugid,u.pid,u.userid from sys_ug ug,sys_ug_user uu,sys_userinfo u where ug.ugid=uu.ugid and uu.pid=u.pid and ug.status='1' and uu.status='1' and u.status='1'",
+    "sql_desc": "系统预留",
+    "sql_group": "base"
+  },
+  {
+    "sqlid": "user0013",
+    "content": "select scope.scope scope from sys_pl_tp_app client,sys_pl_client_scope scope where client.tp_appid=? and client.tp_appid=scope.client_id and client.status='1' and scope.status='1'",
+    "sql_desc": "系统预留",
+    "sql_group": "base"
+  },
+  {
+    "sqlid": "vendor0001",
+    "content": "select vendorid,vendornm,pid,status from sys_vendor",
+    "sql_desc": "预留数据。获取开发商信息集合",
+    "sql_group": "base"
+  }
+]
