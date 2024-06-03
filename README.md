@@ -2,38 +2,16 @@
 
 Java JDK 8u111, Tomcat 9, Servlet 4.0.
 
-> 该文档部分内容为商业机密
-
 
 # 注意:
 
 * java 版本 >= JDK 8u111
 * JEE 容器必须以 UTF-8 模式启动 `set JAVA_OPTS=-Dfile.encoding=UTF-8`.
 * sys_mdm001.url 字段与平台服务接口绑定.
-* 需要把 `crypto.dll` 文件复制到 `java.library.path` 指向的目录中 (jdk/bin 目录).
 * SqlServer 2012 之后的版本支持分页查询.
 * 使用 `gradle` 构建/发布混淆后的 war 包.
-* 配置文件中 `rootUserName: admin-pl`, 
-  `rootPassword: 861170a039539136e605744dbbeb81e607173d1aa8e94bac1f0db9ba77ec88fc` 
   方可启用超级用户
 * 若要启用区块链服务器, 必须有 0 号节点.
-
-
-# 需要做:
-
-* 构建宣传页.
-* 分布式投票算法 (http://www.cnblogs.com/smartloli/p/7190360.html)(https://raft.github.io/)
-* 接管 Tomcat.
-* 云盘系统(api已经完成)
-* 多语言
-* js 字典模块
-* org 参数只作为 mysql schema 选择条件, 并从 api 加载流程中分离; app 直接作为根选择条件,
-  因为 app 是不会重复的 (XjOrg 和 XjApp 解绑, 表 sys_apps 没有和机构做关联).
-* 机构自己的模板目录
-
-* 微信接入, 扫码登录, 创建用户, 关联用户组
-* 统计分析模块 -api完成 +wiki +画面
-* docker 管理模块.
 
 
 # 2.0 新特性
@@ -238,20 +216,6 @@ com.xboson.j2ee.container.UrlMapping=DEBUG
   * ERROR   | 以下日志都启用
   * FATAL   | 以下日志都启用
   
-  
-## API 分级授权代码
-
-这些功能需要授权后方可正式使用.
-
-`app.module.schedule.functions()`   计划任务
-`app.module.shell.functions()`      外壳脚本
-`app.module.mongodb.functions()`    MongoDB 驱动
-`app.module.fabric.functions()`     区块链驱动
-`app.module.cluster.functions()`    集群管理
-`app.module.apipm.functions()`      API 进程管理
-`app.module.sql.switch.org()`       连接外部数据源(停用)
-`app.module.webservice.functions()` WebService 服务
-`api.ide.code.modify.functions()`   JS-IDE / UI-IDE 授权
 
 
 # Mysql 默认配置文件
